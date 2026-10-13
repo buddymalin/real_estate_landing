@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+// If site.formEndpoint is set (e.g. a Formspree or Web3Forms URL), the form posts there.
+// Otherwise it opens the visitor's email app with the message filled in.
+const endpoint = site.formEndpoint;
+---
+<Base title="Contact" description={`Contact ${site.name}, REALTOR® with ${site.brokerage} in Knoxville, TN.`}>
+  <section class="page-head">
+    <div class="wrap">
+      <h1>Contact Me</h1>
+      <p>Call, text, email, or send a note below. I'll get back to you quickly.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap contact-grid">
+      <div>
+        <ul class="contact-list">
+          <li><span>Direct / text</span><a href={`tel:${site.phoneDirectTel}`}>{site.phoneDirect}</a></li>
+          <li><span>Office</span><a href={`tel:${site.phoneOfficeTel}`}>{site.phoneOffice}</a></li>
+          <li><span>Email</span><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><span>Office address</span>{site.brokerage}, {site.office}<br />{site.officeAddress}, {site.officeCity}</li>
+        </ul>
+      </div>
+      <form id="contact-form" method="POST" action={endpoint || undefined} data-endpoint={endpoint}>
+        <label for="name">Name</label>
+        <input id="name" name="name" required autocomplete="name" />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required autocomplete="email" />
+        <label for="phone">Phone (optional)</label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel" />
+        <label for="topic">I'm interested in</label>
+        <select id="topic" name="topic">
+          <option>Buying a home</option>
+          <option>Selling my home</option>
+          <option>Buying and selling</option>
+          <option>Land or acreage</option>
+          <option>Something else</option>
+        </select>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required placeholder="The more detail the better."></textarea>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <script define:vars={{ email: site.email }}>
+    const form = document.getElementById('contact-form');
+    if (form && !form.dataset.endpoint) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const d = new FormData(form);
+        const subject = `Website inquiry: ${d.get('topic')}`;
+        const body = `${d.get('message')}\n\n${d.get('name')}\n${d.get('email')}\n${d.get('phone') || ''}`;
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
+    }
+  </script>
+</Base>

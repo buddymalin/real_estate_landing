@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import ListingCard from '../components/ListingCard.astro';
+import site from '../data/site.json';
+import listings from '../data/listings.json';
+const featured = listings.active.slice(0, 3);
+---
+<Base>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--sage)">Knoxville &amp; East Tennessee Real Estate</p>
+      <h1>Find your dream home</h1>
+      <p>Whether you're buying your first home, moving up, or selling the place you've loved for years, I'll guide you through every step.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={site.searchUrl} target="_blank" rel="noopener">Search Homes</a>
+        <a class="btn btn-outline" href="/contact">Talk With Buddy</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap agent">
+      <div class="agent-photo"><img src="/images/buddy-malin.jpg" alt={`${site.name}, REALTOR®`} width="720" height="960" /></div>
+      <div>
+        <p class="eyebrow">Your local REALTOR®</p>
+        <h2>{site.name}</h2>
+        <p>For {site.yearsExperience} years I've helped families across Knoxville and the surrounding counties buy and sell homes. I know these neighborhoods, from North Knoxville to the lakes and the countryside, and I take the time to understand what matters to you before we start.</p>
+        <dl class="agent-meta">
+          <div><dt>Direct</dt><dd><a href={`tel:${site.phoneDirectTel}`}>{site.phoneDirect}</a></dd></div>
+          <div><dt>Office</dt><dd><a href={`tel:${site.phoneOfficeTel}`}>{site.phoneOffice}</a></dd></div>
+          <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+          <div><dt>License</dt><dd>TN #{site.license}</dd></div>
+        </dl>
+        <a class="btn btn-navy" href="/about">More about me</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px">
+        <div><p class="eyebrow">Featured</p><h2 style="margin:0">My current listings</h2></div>
+        <a href="/listings">See all listings →</a>
+      </div>
+      <div class="grid">
+        {featured.map((l) => <ListingCard l={l} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div>
+        <h2>Search every home in East Tennessee</h2>
+        <p>Browse all active MLS listings on the Wallace Real Estate search.</p>
+      </div>
+      <a class="btn btn-primary" href={site.searchUrl} target="_blank" rel="noopener">Start Searching</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">How I can help</p>
+      <h2>Buying or selling, you're in good hands</h2>
+      <div class="services" style="margin-top:28px">
+        <div class="service" style="background:var(--sage-light)">
+          <h3>Buying a home</h3>
+          <p>From getting pre-approved to finding the right neighborhood and negotiating the best price, I'll be with you until you have the keys.</p>
+        </div>
+        <div class="service" style="background:var(--sage-light)">
+          <h3>Selling your home</h3>
+          <p>Accurate pricing, strong marketing through Wallace, and steady negotiation to get your home sold for top dollar.</p>
+        </div>
+        <div class="service" style="background:var(--sage-light)">
+          <h3>Land &amp; acreage</h3>
+          <p>Lots, farms and acreage across the region. I can help you understand what a piece of land is worth and what you can do with it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

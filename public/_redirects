@@ -1,0 +1,12 @@
+# Old MoxiWorks URLs -> new pages (Cloudflare Pages / Netlify format)
+/profile/my-bio            /about                301
+/contact-me                /contact              301
+/listings/my-active-listings /listings           301
+/listing/*                 /listings             301
+/search/*                  https://wallacetn.com/search 302
+/financial-calculators     /mortgage-calculator  301
+/testimonial-tree          /about                301
+/buying-and-selling-tips   /                     301
+/neighborhood-news         /                     301
+/fair-housing-notice       /fair-housing         301
+/privacy-policy            /privacy              301

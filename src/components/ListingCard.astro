@@ -1,0 +1,25 @@
+---
+interface Props { l: any }
+const { l } = Astro.props;
+const fmt = (n: number) => '$' + n.toLocaleString('en-US');
+const statusClass = (l.status || '').toLowerCase();
+---
+<article class="card">
+  <div class="card-img">
+    {l.photo
+      ? <img src={l.photo} alt={`${l.address}, ${l.city}`} loading="lazy" />
+      : <svg class="placeholder" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/></svg>}
+    <span class={`badge ${statusClass}`}>{l.status}</span>
+  </div>
+  <div class="card-body">
+    <p class="price">{fmt(l.price)}</p>
+    <p class="addr">{l.address}<br />{l.city}</p>
+    <div class="specs">
+      {l.beds ? <span>{l.beds} bd</span> : null}
+      {l.baths ? <span>{l.baths} ba</span> : null}
+      {l.sqft ? <span>{l.sqft.toLocaleString('en-US')} sq ft</span> : null}
+      {l.type ? <span>{l.type}</span> : null}
+    </div>
+    {l.link && <p style="margin:14px 0 0"><a href={l.link} target="_blank" rel="noopener">View details →</a></p>}
+  </div>
+</article>

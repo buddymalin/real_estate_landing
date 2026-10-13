@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import ListingCard from '../components/ListingCard.astro';
+import site from '../data/site.json';
+import listings from '../data/listings.json';
+const fmt = (n: number) => '$' + n.toLocaleString('en-US');
+---
+<Base title="Listings" description={`Current and recently sold listings from ${site.name}, ${site.brokerage}.`}>
+  <section class="page-head">
+    <div class="wrap">
+      <h1>My Listings</h1>
+      <p>Homes and land I'm currently representing, plus a few I've recently sold.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Available now</h2>
+      <div class="grid" style="margin-top:24px">
+        {listings.active.map((l) => <ListingCard l={l} />)}
+      </div>
+      <p style="margin-top:32px">Looking for something else? <a href={site.searchUrl} target="_blank" rel="noopener">Search all East Tennessee listings</a> or <a href="/contact">tell me what you're after</a>.</p>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <h2>Recently sold</h2>
+      <table class="sold-table" style="margin-top:20px">
+        <thead><tr><th>Address</th><th class="hide-sm">Details</th><th>Sold</th></tr></thead>
+        <tbody>
+          {listings.sold.map((s) => (
+            <tr>
+              <td><strong>{s.address}</strong><br /><span style="color:var(--muted)">{s.city}, TN</span></td>
+              <td class="hide-sm">{s.beds} bd · {s.baths} ba · {s.sqft.toLocaleString('en-US')} sq ft</td>
+              <td class="num">{fmt(s.price)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</Base>

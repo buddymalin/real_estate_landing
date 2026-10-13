@@ -1,0 +1,67 @@
+{
+  "_howTo": "Edit this file to update listings. status: Active | Pending | Sold. photo: a file in public/images/ (or leave empty for a placeholder). link: optional URL to the full MLS listing.",
+  "active": [
+    {
+      "address": "1351 Grand Colony Lane",
+      "city": "Powell, TN 37849",
+      "price": 629900,
+      "beds": 4,
+      "baths": 3,
+      "sqft": 3000,
+      "status": "Active",
+      "photo": "/images/listing-1351-grand-colony.jpg",
+      "link": ""
+    },
+    {
+      "address": "1451 Branch Field Lane",
+      "city": "Knoxville, TN 37918",
+      "price": 599800,
+      "beds": 5,
+      "baths": 3,
+      "sqft": 2919,
+      "status": "Active",
+      "photo": "/images/listing-1451-branch-field.jpg",
+      "link": ""
+    },
+    {
+      "address": "138 Stooksbury Lane",
+      "city": "Andersonville, TN 37705",
+      "price": 199900,
+      "status": "Pending",
+      "photo": "",
+      "link": ""
+    },
+    {
+      "address": "6220–6224 Outlook Trail",
+      "city": "Russellville, TN 37860",
+      "price": 99000,
+      "type": "Land",
+      "status": "Active",
+      "photo": "",
+      "link": ""
+    },
+    {
+      "address": "16305 E Highway 70",
+      "city": "Rockwood, TN 37854",
+      "price": 84900,
+      "type": "Land",
+      "status": "Active",
+      "photo": "",
+      "link": ""
+    }
+  ],
+  "sold": [
+    { "address": "1515 Hall Acres Drive", "city": "Knoxville", "price": 866000, "beds": 5, "baths": 4, "sqft": 4144 },
+    { "address": "12125 Brookstone Drive", "city": "Knoxville", "price": 560000, "beds": 4, "baths": 4, "sqft": 3982 },
+    { "address": "922 Eagle View Drive", "city": "Kodak", "price": 530000, "beds": 3, "baths": 4, "sqft": 4250 },
+    { "address": "6155 Babelay Rd", "city": "Knoxville", "price": 490000, "beds": 4, "baths": 3, "sqft": 3250 },
+    { "address": "2105 Scenic Ridge Cove", "city": "Knoxville", "price": 472500, "beds": 3, "baths": 3, "sqft": 2250 },
+    { "address": "814 Marcaro Lane", "city": "Maryville", "price": 451000, "beds": 3, "baths": 3, "sqft": 1828 },
+    { "address": "1410 Summer Meadow Drive", "city": "Powell", "price": 429900, "beds": 4, "baths": 3, "sqft": 1980 },
+    { "address": "7749 Camberley Drive", "city": "Powell", "price": 420000, "beds": 4, "baths": 3, "sqft": 2222 },
+    { "address": "7314 Shalimar Point Way", "city": "Knoxville", "price": 400000, "beds": 3, "baths": 2, "sqft": 2178 },
+    { "address": "8042 Tree Line Lane", "city": "Corryton", "price": 386600, "beds": 3, "baths": 2, "sqft": 1870 },
+    { "address": "7719 Honey Oaks Rd", "city": "Corryton", "price": 381900, "beds": 3, "baths": 3, "sqft": 2224 },
+    { "address": "8613 Rayworth Trail", "city": "Powell", "price": 380000, "beds": 3, "baths": 3, "sqft": 2170 }
+  ]
+}

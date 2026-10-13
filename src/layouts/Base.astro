@@ -1,0 +1,114 @@
+---
+import '../styles/global.css';
+import site from '../data/site.json';
+
+interface Props { title?: string; description?: string; }
+const { title, description = `${site.name}, REALTOR® with ${site.brokerage} in Knoxville, TN. Helping East Tennessee buyers and sellers for ${site.yearsExperience} years.` } = Astro.props;
+const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Knoxville REALTOR® – ${site.brokerage}`;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/listings', label: 'Listings' },
+  { href: '/about', label: 'About' },
+  { href: '/mortgage-calculator', label: 'Calculator' },
+];
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL('/images/buddy-malin.jpg', Astro.site)} />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateAgent',
+    name: site.name,
+    image: new URL('/images/buddy-malin.jpg', Astro.site).href,
+    telephone: site.phoneDirectTel,
+    email: site.email,
+    url: Astro.site?.href,
+    address: { '@type': 'PostalAddress', streetAddress: site.officeAddress, addressLocality: 'Knoxville', addressRegion: 'TN', postalCode: '37918', addressCountry: 'US' },
+    parentOrganization: { '@type': 'RealEstateAgent', name: site.brokerage, url: site.brokerageUrl },
+    sameAs: [site.facebook, site.linkedin],
+  })} />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label={`${site.name} home`}>
+        <img src="/images/wallace-horizontal-light.png" alt="Wallace Real Estate" width="126" height="34" />
+        <span class="brand-name">{site.name}</span>
+      </a>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="nav" id="nav">
+        {nav.map((n) => <a href={n.href} aria-current={path === n.href ? 'page' : undefined}>{n.label}</a>)}
+        <a href={site.searchUrl} target="_blank" rel="noopener">Search Homes</a>
+        <a class="btn btn-primary" href="/contact">Contact Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <main><slot /></main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h3>{site.name}, {site.title}</h3>
+          <p>{site.brokerage}<br />{site.office}<br />{site.officeAddress}<br />{site.officeCity}</p>
+          <p>TN License #{site.license}</p>
+          <div class="social">
+            <a href={site.facebook} target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4 1.7-4 4.2V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/></svg></a>
+            <a href={site.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.2 1.5-2.2 2.9V21H9z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <p>Direct: <a href={`tel:${site.phoneDirectTel}`}>{site.phoneDirect}</a><br />
+          Office: <a href={`tel:${site.phoneOfficeTel}`}>{site.phoneOffice}</a><br />
+          <a href={`mailto:${site.email}`}>{site.email}</a></p>
+        </div>
+        <div>
+          <h3>Explore</h3>
+          <p><a href="/listings">My listings</a><br />
+          <a href={site.searchUrl} target="_blank" rel="noopener">Search all homes</a><br />
+          <a href="/mortgage-calculator">Mortgage calculator</a><br />
+          <a href="/fair-housing">Fair Housing notice</a></p>
+        </div>
+      </div>
+      <div class="footer-logos">
+        <a href={site.brokerageUrl} target="_blank" rel="noopener"><img class="wallace" src="/images/wallace-footer.png" alt="Wallace Real Estate" width="98" height="70" /></a>
+        <img src="/images/equal-housing.png" alt="Equal Housing Opportunity" width="56" height="52" />
+        <img src="/images/realtor.png" alt="REALTOR®" width="45" height="52" />
+      </div>
+      <div class="footer-legal">
+        <p>© {year} {site.name}. {site.name} is an independent contractor sales associate affiliated with {site.brokerage}, {site.officeAddress}, {site.officeCity}, {site.phoneOffice}. Not intended as a solicitation if your property is already listed with another broker. Information deemed reliable but not guaranteed. <a href="/fair-housing">Fair Housing</a> · <a href="/privacy">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('nav');
+    btn?.addEventListener('click', () => {
+      const open = nav?.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(!!open));
+    });
+  </script>
+</body>
+</html>

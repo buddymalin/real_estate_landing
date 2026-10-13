@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Mortgage Calculator" description="Estimate your monthly mortgage payment for a home in East Tennessee.">
+  <section class="page-head">
+    <div class="wrap">
+      <h1>Mortgage Calculator</h1>
+      <p>Get a quick estimate of your monthly payment.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap calc">
+      <form id="calc" onsubmit="return false">
+        <label for="price">Home price ($)</label>
+        <input id="price" type="number" inputmode="numeric" value="400000" min="0" step="1000" />
+        <label for="down">Down payment (%)</label>
+        <input id="down" type="number" inputmode="decimal" value="20" min="0" max="100" step="0.5" />
+        <label for="rate">Interest rate (%)</label>
+        <input id="rate" type="number" inputmode="decimal" value="6.375" min="0" step="0.125" />
+        <label for="term">Loan term</label>
+        <select id="term"><option value="30">30 years</option><option value="20">20 years</option><option value="15">15 years</option></select>
+        <label for="tax">Property tax ($ / year)</label>
+        <input id="tax" type="number" inputmode="numeric" value="2400" min="0" step="100" />
+        <label for="ins">Homeowners insurance ($ / year)</label>
+        <input id="ins" type="number" inputmode="numeric" value="1500" min="0" step="100" />
+      </form>
+      <div>
+        <div class="calc-result" aria-live="polite">
+          <div style="opacity:.8">Estimated monthly payment</div>
+          <div class="big" id="total">$0</div>
+          <dl>
+            <dt>Principal &amp; interest</dt><dd id="pi">$0</dd>
+            <dt>Property tax</dt><dd id="mtax">$0</dd>
+            <dt>Insurance</dt><dd id="mins">$0</dd>
+            <dt>Loan amount</dt><dd id="loan">$0</dd>
+          </dl>
+        </div>
+        <p class="fine" style="margin-top:16px">For general information only. Your actual payment will depend on your lender, credit, down payment, mortgage insurance and other factors. Talk with a lender about the programs available to you.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+    const money = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
+    function calc() {
+      const price = +$('price').value || 0;
+      const down = Math.min(Math.max(+$('down').value || 0, 0), 100);
+      const rate = (+$('rate').value || 0) / 100 / 12;
+      const n = +$('term').value * 12;
+      const loan = price * (1 - down / 100);
+      const pi = rate ? loan * rate / (1 - Math.pow(1 + rate, -n)) : loan / n;
+      const tax = (+$('tax').value || 0) / 12;
+      const ins = (+$('ins').value || 0) / 12;
+      $('pi').textContent = money(pi);
+      $('mtax').textContent = money(tax);
+      $('mins').textContent = money(ins);
+      $('loan').textContent = money(loan);
+      $('total').textContent = money(pi + tax + ins);
+    }
+    document.getElementById('calc')?.addEventListener('input', calc);
+    calc();
+  </script>
+</Base>

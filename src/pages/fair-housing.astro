@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+---
+<Base title="Fair Housing Notice">
+  <section class="page-head"><div class="wrap"><h1>Fair Housing Notice</h1></div></section>
+  <section class="section">
+    <div class="wrap prose">
+      <p>{site.name} and {site.brokerage} are committed to the letter and spirit of the federal Fair Housing Act and the Equal Credit Opportunity Act, along with all Tennessee and local fair housing laws.</p>
+      <p>It is illegal to discriminate in the sale, rental, or financing of housing because of race, color, religion, sex (including sexual orientation and gender identity), disability, familial status, or national origin. We provide equal professional service to everyone.</p>
+      <p>If you believe you have experienced housing discrimination, you can contact the U.S. Department of Housing and Urban Development at <a href="https://www.hud.gov/fairhousing" target="_blank" rel="noopener">hud.gov/fairhousing</a> or call 1-800-669-9777. You may also contact the Tennessee Human Rights Commission.</p>
+    </div>
+  </section>
+</Base>

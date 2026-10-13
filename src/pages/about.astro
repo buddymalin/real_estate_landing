@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+---
+<Base title="About Buddy" description={`Meet ${site.name}, a Knoxville REALTOR® with ${site.yearsExperience} years of experience at ${site.brokerage}.`}>
+  <section class="page-head">
+    <div class="wrap">
+      <h1>About Buddy</h1>
+      <p>{site.title} · {site.office}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap agent" style="align-items:start">
+      <div class="agent-photo"><img src="/images/buddy-malin.jpg" alt={site.name} width="720" height="960" /></div>
+      <div class="prose">
+        <!-- Bio draft: replace or edit with Buddy's own words. -->
+        <p>I've been helping people buy and sell homes in Knoxville and East Tennessee for {site.yearsExperience} years. Over that time I've worked with first-time buyers, growing families, retirees, investors and landowners, and I've learned that every move is personal.</p>
+        <p>I know this market well: what homes are really worth, how quickly they sell, and how to negotiate so my clients come out ahead. From downtown and North Knoxville to the suburbs, the lakes and the countryside, I can help you understand each neighborhood and find the one that fits.</p>
+        <p>To me, the job isn't over at closing. Many of my clients come back years later, or send their friends and family, and that trust is what I value most.</p>
+        <p>I'm proud to work with {site.brokerage}, one of East Tennessee's leading independent brokerages. If you're thinking about buying or selling, I'd love to hear from you.</p>
+        <dl class="agent-meta">
+          <div><dt>Direct</dt><dd><a href={`tel:${site.phoneDirectTel}`}>{site.phoneDirect}</a></dd></div>
+          <div><dt>Office</dt><dd><a href={`tel:${site.phoneOfficeTel}`}>{site.phoneOffice}</a></dd></div>
+          <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+          <div><dt>License</dt><dd>TN #{site.license}</dd></div>
+        </dl>
+        <a class="btn btn-primary" href="/contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+---
+<Base title="Privacy">
+  <section class="page-head"><div class="wrap"><h1>Privacy</h1></div></section>
+  <section class="section">
+    <div class="wrap prose">
+      <p>This website does not use tracking cookies or sell personal information.</p>
+      <p>If you contact {site.name} through this site, by phone, or by email, the information you provide (such as your name, email, phone number and message) is used only to respond to you and help with your real estate needs. It is not shared with third parties except as needed to complete a transaction you've asked for help with.</p>
+      <p>Links to outside sites, such as the Wallace Real Estate property search, are governed by those sites' own privacy policies.</p>
+      <p>Questions? Email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</Base>
